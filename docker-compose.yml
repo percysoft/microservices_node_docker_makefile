@@ -4,19 +4,26 @@ services:
     container_name: api_rest
     image: express_api:latest
     ports:
-      - 3000:3000
-
+      - '3000:3000'
+    volumes:
+      - ./application:/home/app
+    command: '${COMMAND}'
+    depends_on:
+      - microservice_db
+    networks:
+      - network-micro
   microservice_db:
-    container_name: api_db
+    container_name: microservice_db
+    restart: always
     build: container/mysql
     ports:
-      - 3307:3306
+      - '3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: '123456'
     volumes:
       - ./data/mysql:/var/lib/mysql
+    networks:
+      - network-micro
 
 networks:
-  default:
-    external:
-      name: $DOCKER_NETWORK
+  network-micro:

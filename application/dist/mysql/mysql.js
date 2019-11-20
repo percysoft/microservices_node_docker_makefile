@@ -5,11 +5,12 @@ class Mysql {
     constructor() {
         this.conectado = false;
         console.log('Clase incializada');
+        console.log('aaaa');
         this.cnn = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "root",
-            database: "node_db"
+            host: 'microservice_db',
+            user: 'root',
+            password: '123456',
+            database: 'node_db',
         });
         this.conectarDB();
     }
@@ -33,7 +34,8 @@ class Mysql {
     conectarDB() {
         this.cnn.connect((err) => {
             if (err) {
-                console.log(err.message);
+                console.log(err, 'z---- error');
+                console.log(err.message, '<- error');
                 return;
             }
             this.conectado = true;

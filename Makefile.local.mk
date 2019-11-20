@@ -3,12 +3,14 @@
 
 DOCKER_NETWORK 		= base_network
 
-start: ## Instalar dependencias: make install
-	cp application/package.json container/node
-	DOCKER_NETWORK=$(DOCKER_NETWORK) \
-	docker-compose up
-	rm container/node/package.json
+install: ## Instalar dependencias: make install
+	COMMAND='npm install' docker-compose up
 
+build-ts: ## Instalar dependencias: make install
+	COMMAND='npm run build' docker-compose up
+
+start: ## Instalar dependencias: make install
+	COMMAND='npm run start' docker-compose up
 
 build: ## build image to dev and cli: make build
 	docker build -f container/node/Dockerfile -t express_api:latest container/node
