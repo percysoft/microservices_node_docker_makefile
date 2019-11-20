@@ -1,15 +1,14 @@
 FROM node:10
 
+RUN mkdir -p /home/usr/app
 WORKDIR /usr/app
 
-COPY application/package*.json ./
+COPY package.json /usr/app
 
-RUN npm install
-
-COPY application .
+ADD . /usr/app
 
 RUN npm run build
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start"] 

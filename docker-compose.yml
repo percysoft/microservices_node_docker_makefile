@@ -2,18 +2,21 @@ version: '3'
 services:
   microservice:
     container_name: api_rest
-    build: container/node
+    image: express_api:latest
     ports:
       - 3000:3000
+
   microservice_db:
     container_name: api_db
     build: container/mysql
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'dbnode_db'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'root'
-      MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      - 3306:3306
-    
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+
+networks:
+  default:
+    external:
+      name: $DOCKER_NETWORK
