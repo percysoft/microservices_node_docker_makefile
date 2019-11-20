@@ -1,0 +1,19 @@
+version: '3'
+services:
+  microservice:
+    container_name: api_rest
+    build: container/node
+    ports:
+      - 3000:3000
+  microservice_db:
+    container_name: api_db
+    build: container/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'dbnode_db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - 3306:3306
+    
