@@ -1,27 +1,27 @@
 version: '3'
 services:
   microservice:
-    container_name: api_rest
+    container_name: api_rest_node
     image: express_api:latest
     ports:
       - '3000:3000'
     volumes:
-      - ./application:/home/app
+      - ./microservice_mysql/application:/home/app
     command: '${COMMAND}'
     depends_on:
       - microservice_db
     networks:
       - network-micro
   microservice_db:
-    container_name: microservice_db
+    container_name: microservice_mysql_db
     restart: always
-    build: container/mysql
+    build: microservice_mysql/container/mysql
     ports:
       - '3306:3306'
     environment:
       MYSQL_ROOT_PASSWORD: '123456'
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - ./microservice_mysql/data/mysql:/var/lib/mysql
     networks:
       - network-micro
 

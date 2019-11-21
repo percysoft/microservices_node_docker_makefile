@@ -8,8 +8,8 @@ class Mysql {
         console.log('aaaa');
         this.cnn = mysql.createConnection({
             host: 'microservice_db',
-            user: 'root',
-            password: '123456',
+            user: 'percy',
+            password: 'percy',
             database: 'node_db',
         });
         this.conectarDB();
