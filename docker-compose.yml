@@ -24,6 +24,18 @@ services:
       - ./microservice_mysql/data/mysql:/var/lib/mysql
     networks:
       - network-micro
+  gateway:
+    container_name: "gateway"
+    build: ./microservice_gateway/container
+    ports:
+      - "3200:3200"
+    volumes:
+      - ./microservice_gateway:/home/app
+    command: '${COMMAND}'
+    depends_on:
+      - microservice
+    networks:
+      - network-micro
 
 networks:
   network-micro:

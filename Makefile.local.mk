@@ -9,6 +9,9 @@ start: ## Instalar dependencias: make install
 build: ## build image to dev and cli: make build
 	docker build -f microservice_mysql/container/node/Dockerfile -t express_api:latest microservice_mysql/container/node
 
+install: ## Instalar dependencias: make install
+	COMMAND='npm install' docker-compose up
+
 ## Target Help ##
 help:
 	@printf "\033[31m%-22s %-59s %s\033[0m\n" "Target" " Help" "Usage"; \
